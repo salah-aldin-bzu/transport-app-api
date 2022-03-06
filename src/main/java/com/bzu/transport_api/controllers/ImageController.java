@@ -4,7 +4,6 @@ import com.bzu.transport_api.models.Image;
 import com.bzu.transport_api.repositories.ImageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,6 +18,7 @@ import java.util.zip.Deflater;
 import java.util.zip.Inflater;
 
 
+@CrossOrigin("*")
 
 @RestController
 @RequestMapping("image")

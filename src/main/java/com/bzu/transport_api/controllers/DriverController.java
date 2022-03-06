@@ -1,6 +1,5 @@
 package com.bzu.transport_api.controllers;
 
-import com.bzu.transport_api.models.Bookmark;
 import com.bzu.transport_api.models.Driver;
 import com.bzu.transport_api.repositories.DriverRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +9,10 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
+
+@CrossOrigin("*")
 
 @RestController
 @RequestMapping("/driver")
@@ -90,6 +92,7 @@ public class DriverController {
 
     @GetMapping("/search")
     public ResponseEntity<Driver> searchDrivers(@RequestParam(name = "searchString") String searchString){
+        searchString = searchString.toLowerCase();
         String[] searchArray = searchString.split(" ");
 
         List<Driver> drivers = null;

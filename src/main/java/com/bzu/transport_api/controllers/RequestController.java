@@ -1,7 +1,6 @@
 package com.bzu.transport_api.controllers;
 
 import com.bzu.transport_api.models.Bookmark;
-import com.bzu.transport_api.models.Driver;
 import com.bzu.transport_api.models.Passenger;
 import com.bzu.transport_api.models.Request;
 import com.bzu.transport_api.repositories.DriverRepository;
@@ -11,14 +10,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.context.request.RequestScope;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+
+@CrossOrigin("*")
 
 @RestController
 @RequestMapping("/request")

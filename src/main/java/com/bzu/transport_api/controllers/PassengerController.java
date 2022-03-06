@@ -8,9 +8,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.Resources;
 import java.util.List;
 import java.util.Optional;
+
+@CrossOrigin("*")
 
 @RestController
 @RequestMapping("/passenger")
