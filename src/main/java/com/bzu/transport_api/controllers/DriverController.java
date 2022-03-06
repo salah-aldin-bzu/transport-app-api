@@ -92,7 +92,6 @@ public class DriverController {
 
     @GetMapping("/search")
     public ResponseEntity<Driver> searchDrivers(@RequestParam(name = "searchString") String searchString){
-        searchString = searchString.toLowerCase();
         String[] searchArray = searchString.split(" ");
 
         List<Driver> drivers = null;
