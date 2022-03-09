@@ -95,6 +95,11 @@ public class RequestController {
 
         if(request.get().getStatus().equals("pending")){
             request.get().setStatus("accepted");
+
+            DateFormat dateFormat = new SimpleDateFormat("YYYY-MM-dd HH:mm:ss");
+            Date date = new Date();
+            request.get().setDate(dateFormat.format(date));
+
             requestRepository.save(request.get());
         }
 
@@ -107,6 +112,11 @@ public class RequestController {
 
         if(request.get().getStatus().equals("pending")){
             request.get().setStatus("rejected");
+
+            DateFormat dateFormat = new SimpleDateFormat("YYYY-MM-dd HH:mm:ss");
+            Date date = new Date();
+            request.get().setDate(dateFormat.format(date));
+
             requestRepository.save(request.get());
         }
 
