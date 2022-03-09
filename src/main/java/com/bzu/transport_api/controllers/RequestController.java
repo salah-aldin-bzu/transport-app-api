@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -69,18 +70,21 @@ public class RequestController {
     @GetMapping("/driver/pending/{driverID}")
     public ResponseEntity<Request> getDriverPendingRequests(@PathVariable int driverID){
         List<Request> requests = requestRepository.findDriverPendingRequests(driverRepository.findById(driverID).get());
+        Collections.reverse(requests);
         return new ResponseEntity(requests, HttpStatus.OK);
     }
 
     @GetMapping("/driver/all/{driverID}")
     public ResponseEntity<Request> getDriverRequests(@PathVariable int driverID){
         List<Request> requests = requestRepository.findDriverRequests(driverRepository.findById(driverID).get());
+        Collections.reverse(requests);
         return new ResponseEntity(requests, HttpStatus.OK);
     }
 
     @GetMapping("/passenger/all/{passengerID}")
     public ResponseEntity<Request> getPassengerRequests(@PathVariable int passengerID){
         List<Request> requests = requestRepository.findPassengerRequests(passengerRepository.findById(passengerID).get());
+        Collections.reverse(requests);
         return new ResponseEntity(requests, HttpStatus.OK);
     }
 
