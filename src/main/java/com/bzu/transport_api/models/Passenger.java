@@ -36,6 +36,10 @@ public class Passenger {
     @JsonIgnoreProperties({"passenger","driver"})
     private  List<Request> requests;
 
+    @OneToOne(mappedBy = "passenger")
+    @JsonIgnoreProperties({"passenger", "driver"})
+    private Location location;
+
     public int getId() {
         return id;
     }
@@ -124,20 +128,50 @@ public class Passenger {
         this.requests = requests;
     }
 
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
+    }
+
     @Override
-    public String toString() {
-        return "Passenger{" +
-                "id=" + id +
-                ", userType='" + userType + '\'' +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", gender='" + gender + '\'' +
-                ", mobileNumber='" + mobileNumber + '\'' +
-                ", address='" + address + '\'' +
-                ", password='" + password + '\'' +
-                ", imagePath='" + imagePath + '\'' +
-                ", bookmarksList=" + bookmarks +
-                ", requests=" + requests +
-                '}';
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Passenger passenger = (Passenger) o;
+
+        if (id != passenger.id) return false;
+        if (userType != null ? !userType.equals(passenger.userType) : passenger.userType != null) return false;
+        if (firstName != null ? !firstName.equals(passenger.firstName) : passenger.firstName != null) return false;
+        if (lastName != null ? !lastName.equals(passenger.lastName) : passenger.lastName != null) return false;
+        if (gender != null ? !gender.equals(passenger.gender) : passenger.gender != null) return false;
+        if (mobileNumber != null ? !mobileNumber.equals(passenger.mobileNumber) : passenger.mobileNumber != null)
+            return false;
+        if (address != null ? !address.equals(passenger.address) : passenger.address != null) return false;
+        if (password != null ? !password.equals(passenger.password) : passenger.password != null) return false;
+        if (imagePath != null ? !imagePath.equals(passenger.imagePath) : passenger.imagePath != null) return false;
+        if (bookmarks != null ? !bookmarks.equals(passenger.bookmarks) : passenger.bookmarks != null) return false;
+        if (requests != null ? !requests.equals(passenger.requests) : passenger.requests != null) return false;
+        return location != null ? location.equals(passenger.location) : passenger.location == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + (userType != null ? userType.hashCode() : 0);
+        result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
+        result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
+        result = 31 * result + (gender != null ? gender.hashCode() : 0);
+        result = 31 * result + (mobileNumber != null ? mobileNumber.hashCode() : 0);
+        result = 31 * result + (address != null ? address.hashCode() : 0);
+        result = 31 * result + (password != null ? password.hashCode() : 0);
+        result = 31 * result + (imagePath != null ? imagePath.hashCode() : 0);
+        result = 31 * result + (bookmarks != null ? bookmarks.hashCode() : 0);
+        result = 31 * result + (requests != null ? requests.hashCode() : 0);
+        result = 31 * result + (location != null ? location.hashCode() : 0);
+        return result;
     }
 }

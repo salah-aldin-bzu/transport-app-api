@@ -39,6 +39,9 @@ public class Driver {
     @JsonIgnoreProperties({"driver","passenger"})
     private List<Request> requests;
 
+    @OneToOne(mappedBy = "driver")
+    @JsonIgnoreProperties({"passenger", "driver"})
+    private Location location;
 
     public int getId() {
         return id;
@@ -136,6 +139,56 @@ public class Driver {
         this.requests = requests;
     }
 
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Driver driver = (Driver) o;
+
+        if (id != driver.id) return false;
+        if (userType != null ? !userType.equals(driver.userType) : driver.userType != null) return false;
+        if (firstName != null ? !firstName.equals(driver.firstName) : driver.firstName != null) return false;
+        if (lastName != null ? !lastName.equals(driver.lastName) : driver.lastName != null) return false;
+        if (mobileNumber != null ? !mobileNumber.equals(driver.mobileNumber) : driver.mobileNumber != null)
+            return false;
+        if (address != null ? !address.equals(driver.address) : driver.address != null) return false;
+        if (gender != null ? !gender.equals(driver.gender) : driver.gender != null) return false;
+        if (password != null ? !password.equals(driver.password) : driver.password != null) return false;
+        if (imagePath != null ? !imagePath.equals(driver.imagePath) : driver.imagePath != null) return false;
+        if (vehicle != null ? !vehicle.equals(driver.vehicle) : driver.vehicle != null) return false;
+        if (bookmarksList != null ? !bookmarksList.equals(driver.bookmarksList) : driver.bookmarksList != null)
+            return false;
+        if (requests != null ? !requests.equals(driver.requests) : driver.requests != null) return false;
+        return location != null ? location.equals(driver.location) : driver.location == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + (userType != null ? userType.hashCode() : 0);
+        result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
+        result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
+        result = 31 * result + (mobileNumber != null ? mobileNumber.hashCode() : 0);
+        result = 31 * result + (address != null ? address.hashCode() : 0);
+        result = 31 * result + (gender != null ? gender.hashCode() : 0);
+        result = 31 * result + (password != null ? password.hashCode() : 0);
+        result = 31 * result + (imagePath != null ? imagePath.hashCode() : 0);
+        result = 31 * result + (vehicle != null ? vehicle.hashCode() : 0);
+        result = 31 * result + (bookmarksList != null ? bookmarksList.hashCode() : 0);
+        result = 31 * result + (requests != null ? requests.hashCode() : 0);
+        result = 31 * result + (location != null ? location.hashCode() : 0);
+        return result;
+    }
+
     @Override
     public String toString() {
         return "Driver{" +
@@ -151,12 +204,7 @@ public class Driver {
                 ", vehicle=" + vehicle +
                 ", bookmarksList=" + bookmarksList +
                 ", requests=" + requests +
+                ", location='" + location + '\'' +
                 '}';
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        Driver driver = (Driver) obj;
-        return this.id == driver.id;
     }
 }

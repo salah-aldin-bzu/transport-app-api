@@ -67,16 +67,23 @@ public class RequestController {
     }
 
     @GetMapping("/driver/pending/{driverID}")
-    public ResponseEntity<Passenger> getDriverPendingRequests(@PathVariable int driverID){
+    public ResponseEntity<Request> getDriverPendingRequests(@PathVariable int driverID){
         List<Request> requests = requestRepository.findDriverPendingRequests(driverRepository.findById(driverID).get());
         return new ResponseEntity(requests, HttpStatus.OK);
     }
 
     @GetMapping("/driver/all/{driverID}")
-    public ResponseEntity<Passenger> getDriverRequests(@PathVariable int driverID){
+    public ResponseEntity<Request> getDriverRequests(@PathVariable int driverID){
         List<Request> requests = requestRepository.findDriverRequests(driverRepository.findById(driverID).get());
         return new ResponseEntity(requests, HttpStatus.OK);
     }
+
+    @GetMapping("/passenger/all/{passengerID}")
+    public ResponseEntity<Request> getPassengerRequests(@PathVariable int passengerID){
+        List<Request> requests = requestRepository.findPassengerRequests(passengerRepository.findById(passengerID).get());
+        return new ResponseEntity(requests, HttpStatus.OK);
+    }
+
 
     @PutMapping("/driver/accept")
     public ResponseEntity<String> driverAcceptRequest(@RequestParam(name = "driverID") int driverID, @RequestParam(name = "passengerID") int passengerID){
@@ -84,6 +91,18 @@ public class RequestController {
 
         if(request.get().getStatus().equals("pending")){
             request.get().setStatus("accepted");
+            requestRepository.save(request.get());
+        }
+
+        return new ResponseEntity(request.get().getStatus(), HttpStatus.OK);
+    }
+
+    @PutMapping("/driver/reject")
+    public ResponseEntity<String> driverRejectRequest(@RequestParam("driverID") int driverID, @RequestParam(name = "passengerID") int passengerID){
+        Optional<Request> request = requestRepository.findPendingRequest(driverRepository.findById(driverID).get(), passengerRepository.findById(passengerID).get());
+
+        if(request.get().getStatus().equals("pending")){
+            request.get().setStatus("rejected");
             requestRepository.save(request.get());
         }
 

@@ -21,4 +21,7 @@ public interface RequestRepository extends JpaRepository<Request, Integer> {
 
     @Query("Select r from Request r where r.driver=:driver")
     List<Request> findDriverRequests(@Param("driver") Driver driver);
+
+    @Query("Select r from Request r where r.passenger=:passenger")
+    List<Request> findPassengerRequests(@Param("passenger") Passenger passenger);
 }
