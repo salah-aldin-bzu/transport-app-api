@@ -47,7 +47,7 @@ public class RequestController {
     @PostMapping("/send")
     public ResponseEntity<Request> createRequest(@RequestParam(name = "driverID") int driverID, @RequestParam(name = "passengerID") int passengerID){
 
-        if(requestRepository.findPendingRequest(driverRepository.getById(driverID), passengerRepository.getById(passengerID)).isEmpty()){
+        if(requestRepository.findPendingRequest(driverRepository.findById(driverID).get(), passengerRepository.findById(passengerID).get()).isEmpty()){
             Request request = new Request();
 
             request.setDriver(driverRepository.getById(driverID));
